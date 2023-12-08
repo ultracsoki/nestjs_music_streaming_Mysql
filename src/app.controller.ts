@@ -37,31 +37,32 @@ export class AppController {
     res.redirect('/');
   }
 
-  @Get('/modifyMusic')
+  @Get('/modifyMusicForm')
   @Render('modifyMusic')
-  modifyMusic () 
+  modifyMusicForm () 
   {
     return { messages: '' };
   }
-
-  /*@Post('/newMusic')
-  @Render('newMusic')
-  async modifyMusic1(@Body() modifyMusicDTO: modifyMusicDTO, @Res() res: Response) {
+  
+  /*@Post('/modifyMusicForm')
+  @Render('modifyMusic')
+  async modifyMusic(@Body() modifyMusicDTO: modifyMusicDTO, @Res() res: Response) {
     const selectedId = modifyMusicDTO.id;
+    const title = ;
+    const artist = newMusic.artist;
+    const length = newMusic.length;
     const [ adatok ] = await conn.execute('UPDATE zeneszamok SET title=?, artist=?, length=? WHERE id=?', [modifyMusicDTO.title,modifyMusicDTO.artist,modifyMusicDTO.length,selectedId]);
-      const title = newMusic.title;
-      const artist = newMusic.artist;
-      const length = newMusic.length;
-      if(title == "" || artist == "" || length.toString() == "") {
-        return { messages: "Minden mezőt kötelező kitölteni!"};
-      } else if (length < 0){
-        return { messages: "Az életkor nem lehet negatív!"};
-      } else {
-        const [ adatok ] = await conn.execute('INSERT INTO zeneszamok (title, artist, length) VALUES (?, ?, ?)', [ 
-          title,
-          artist,
-          length,
-        ],
+    
+    if(title == "" || artist == "" || length.toString() == "") {
+      return { messages: "Minden mezőt kötelező kitölteni!"};
+    } else if (length < 0){
+      return { messages: "Az életkor nem lehet negatív!"};
+    } else {
+      const [ adatok ] = await conn.execute('INSERT INTO zeneszamok (title, artist, length) VALUES (?, ?, ?)', [ 
+        title,
+        artist,
+        length,
+      ],
         );
         res.redirect('/');
       }
